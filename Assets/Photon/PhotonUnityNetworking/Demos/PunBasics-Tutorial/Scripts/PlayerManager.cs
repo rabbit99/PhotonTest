@@ -43,7 +43,7 @@ namespace Photon.Pun.Demo.PunBasics
 
         //True, when the user is firing
         bool IsFiring;
-
+        CharacterController _c;
         #endregion
 
         #region MonoBehaviour CallBacks
@@ -72,6 +72,7 @@ namespace Photon.Pun.Demo.PunBasics
             // #Critical
             // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
             DontDestroyOnLoad(gameObject);
+            _c = GetComponent<CharacterController>();
         }
 
         /// <summary>
@@ -270,6 +271,19 @@ namespace Photon.Pun.Demo.PunBasics
                 Debug.Log("GetKey q");
                 spawnObj();
                 photonView.RPC("SpawnObj", RpcTarget.Others);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!photonView.IsMine)
+                    return;
+                Debug.Log("GetKey Space");
+                Vector3 forward = transform.TransformDirection(Vector3.forward);
+                _c.enabled = false;
+                Vector3 ori_p = new Vector3(transform.position.x, 0, transform.position.z);
+                Vector3 new_p = ori_p + forward * 3;
+                transform.position = new_p;
+                _c.enabled = true;
             }
         }
 

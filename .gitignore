@@ -37,3 +37,6 @@ starvr_noShake/
 .vs/FuniquePlayer_openvr/v15/Server/sqlite3/db.lock
 .vs/FuniquePlayer_openvr/v15/sqlite3/db.lock
 starvr_noShake.zip
+.vs/PhotonTest/v15/.suo
+.vs/PhotonTest/v15/Server/sqlite3/storage.ide-shm
+.vs/PhotonTest/v15/Server/sqlite3/storage.ide-wal
