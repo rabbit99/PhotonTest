@@ -35,5 +35,6 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - SpawnObj
+  - Flash
   DisableAutoOpenWizard: 1
   ShowSettings: 1

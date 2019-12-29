@@ -278,12 +278,9 @@ namespace Photon.Pun.Demo.PunBasics
                 if (!photonView.IsMine)
                     return;
                 Debug.Log("GetKey Space");
-                Vector3 forward = transform.TransformDirection(Vector3.forward);
-                _c.enabled = false;
-                Vector3 ori_p = new Vector3(transform.position.x, 0, transform.position.z);
-                Vector3 new_p = ori_p + forward * 3;
-                transform.position = new_p;
-                _c.enabled = true;
+                flash();
+
+                photonView.RPC("Flash", RpcTarget.Others, photonView.ViewID);
             }
         }
 
@@ -302,6 +299,24 @@ namespace Photon.Pun.Demo.PunBasics
             //GameObject go = PhotonNetwork.Instantiate("Cube", tar, Quaternion.identity, 0);
             GameObject p = Resources.Load("Cube") as GameObject;
             Instantiate(p, tar, Quaternion.identity);
+        }
+
+        [PunRPC]
+        void Flash(int _id)
+        {
+            if (photonView.ViewID == _id)
+                flash();
+        }
+
+        private void flash()
+        {
+                Vector3 forward = transform.TransformDirection(Vector3.forward);
+                _c.enabled = false;
+                Vector3 ori_p = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                Vector3 new_p = ori_p + forward * 3;
+                transform.position = new_p;
+                _c.enabled = true;
+            
         }
 
         #endregion
