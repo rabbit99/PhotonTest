@@ -262,6 +262,32 @@ namespace Photon.Pun.Demo.PunBasics
                     this.IsFiring = false;
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (!photonView.IsMine)
+                    return;
+                Debug.Log("GetKey q");
+                spawnObj();
+                photonView.RPC("SpawnObj", RpcTarget.Others);
+            }
+        }
+
+        [PunRPC]
+        void SpawnObj()
+        {
+            spawnObj();
+        }
+
+        private void spawnObj()
+        {
+           
+            Vector3 tar = transform.position;
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            tar += forward * 2;
+            //GameObject go = PhotonNetwork.Instantiate("Cube", tar, Quaternion.identity, 0);
+            GameObject p = Resources.Load("Cube") as GameObject;
+            Instantiate(p, tar, Quaternion.identity);
         }
 
         #endregion
