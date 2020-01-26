@@ -19,15 +19,14 @@ namespace Photon.Pun.Demo.PunBasics
         [SerializeField]
 	    private float directionDampTime = 0.25f;
         Animator animator;
+        #endregion
 
-		#endregion
+        #region MonoBehaviour CallBacks
 
-		#region MonoBehaviour CallBacks
-
-		/// <summary>
-		/// MonoBehaviour method called on GameObject by Unity during initialization phase.
-		/// </summary>
-	    void Start () 
+        /// <summary>
+        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
+        /// </summary>
+        void Start () 
 	    {
 	        animator = GetComponent<Animator>();
 	    }
